@@ -8,7 +8,6 @@ func _ready():
 	estCommencer = false
 
 func _on_RestartButton_pressed():
-	get_tree().reload_current_scene()
 	estCommencer = false
 	emit_signal("restart")
 	print("J'ai restart le jeu")
