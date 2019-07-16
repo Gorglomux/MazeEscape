@@ -5,7 +5,7 @@
 [ext_resource path="res://Image menu/stop.png" type="Texture" id=3]
 [ext_resource path="res://Image menu/arrows.png" type="Texture" id=4]
 
-[node name="Menu" type="Node2D"]
+[node name="Menu" type="Control"]
 script = ExtResource( 1 )
 
 [node name="PlayButton" type="TextureButton" parent="."]

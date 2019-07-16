@@ -1,4 +1,4 @@
-extends Node2D
+extends Control
 signal play
 signal stop
 signal restart
