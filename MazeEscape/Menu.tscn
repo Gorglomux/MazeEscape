@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Menu.gd" type="Script" id=1]
+[ext_resource path="res://Image menu/play.png" type="Texture" id=2]
+[ext_resource path="res://Image menu/stop.png" type="Texture" id=3]
+[ext_resource path="res://Image menu/arrows.png" type="Texture" id=4]
+
+[node name="Menu" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="PlayButton" type="TextureButton" parent="."]
+margin_left = 63.8856
+margin_top = -3.8147e-006
+margin_right = 127.886
+margin_bottom = 64.0
+toggle_mode = true
+texture_normal = ExtResource( 2 )
+texture_pressed = ExtResource( 3 )
+
+[node name="RestartButton" type="TextureButton" parent="."]
+margin_left = 0.487686
+margin_right = 64.4877
+margin_bottom = 64.0
+toggle_mode = true
+texture_normal = ExtResource( 4 )
+[connection signal="pressed" from="PlayButton" to="." method="_on_PlayButton_pressed"]
+[connection signal="pressed" from="RestartButton" to="." method="_on_RestartButton_pressed"]
