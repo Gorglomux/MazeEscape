@@ -1,0 +1,71 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://PlayerActions.gd" type="Script" id=1]
+[ext_resource path="res://buttonBG.png" type="Texture" id=2]
+[ext_resource path="res://arrow.png" type="Texture" id=3]
+[ext_resource path="res://jump.png" type="Texture" id=4]
+[ext_resource path="res://teleporteur.png" type="Texture" id=5]
+
+[node name="Control" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -0.36805
+margin_right = -0.368042
+script = ExtResource( 1 )
+
+[node name="Icons" type="GridContainer" parent="."]
+margin_right = 158.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 10, 10 )
+columns = 5
+
+[node name="ArrowContainer" type="MarginContainer" parent="Icons"]
+margin_right = 50.0
+margin_bottom = 50.0
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Icons/ArrowContainer"]
+margin_right = 50.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 50, 50 )
+texture = ExtResource( 2 )
+
+[node name="Arrow" type="TextureButton" parent="Icons/ArrowContainer"]
+margin_right = 50.0
+margin_bottom = 50.0
+toggle_mode = true
+texture_normal = ExtResource( 3 )
+
+[node name="JumpContainer" type="MarginContainer" parent="Icons"]
+margin_left = 54.0
+margin_right = 104.0
+margin_bottom = 50.0
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Icons/JumpContainer"]
+margin_right = 50.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 50, 50 )
+texture = ExtResource( 2 )
+
+[node name="Jump" type="TextureButton" parent="Icons/JumpContainer"]
+margin_right = 50.0
+margin_bottom = 50.0
+texture_normal = ExtResource( 4 )
+
+[node name="TeleporteurContainer" type="MarginContainer" parent="Icons"]
+margin_left = 108.0
+margin_right = 158.0
+margin_bottom = 50.0
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Icons/TeleporteurContainer"]
+margin_right = 50.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 50, 50 )
+texture = ExtResource( 2 )
+
+[node name="Teleporteur" type="TextureButton" parent="Icons/TeleporteurContainer"]
+margin_right = 50.0
+margin_bottom = 50.0
+texture_normal = ExtResource( 5 )
+[connection signal="pressed" from="Icons/ArrowContainer/Arrow" to="." method="_on_Arrow_pressed"]
+[connection signal="pressed" from="Icons/JumpContainer/Jump" to="." method="_on_Jump_pressed"]
+[connection signal="pressed" from="Icons/TeleporteurContainer/Teleporteur" to="." method="_on_Teleporteur_pressed"]
