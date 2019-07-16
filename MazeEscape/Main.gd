@@ -2,6 +2,11 @@ extends Node2D
 
 enum ACTION_TYPE { SAUT, FLECHE, WARP }
 
+enum TILE_TYPE { GRAVAT, TROU, PLAYER, WALL, WARP,JUMP, ARROW, EXIT, ARROW_RIGHT,
+ ARROW_LEFT, ARROW_UP, ARROW_DOWN}
+
+var player_resource = preload("res://Player.tscn")
+
 var menu
 
 var map
@@ -10,10 +15,15 @@ var player_actions
 
 var current_action
 
+var player
+
+var board
 func _ready():
 	player_actions = $VBoxContainer/MarginContainer/PlayerActions
 	menu = $VBoxContainer/MenuContainer/Menu 
-	map = $VBoxContainer/BoardContainer/Board
+	board = $VBoxContainer/BoardContainer
+	board.load_map()
+	player = board.player
 	
 	menu.connect("play",self,"start_game")
 	menu.connect("stop",self,"stop_game")
@@ -23,7 +33,9 @@ func _ready():
 	player_actions.connect("jump",self,"jump_input")
 	player_actions.connect("warp",self,"warp_input")		
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+		
+
+
 func _process(delta):
 
 	match current_action :
@@ -42,11 +54,11 @@ func _process(delta):
 
 
 func start_game():
-	#player.enmarche  = true
+	player.enMarche  = true
 	pass
 
 func stop_game():
-	#player.enmarche  = false
+	player.enMarche  = false
 	pass
 
 func restart_game():
