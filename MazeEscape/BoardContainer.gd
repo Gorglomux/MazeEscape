@@ -21,9 +21,8 @@ var current_action
 var player
 
 var warp_tiles = []
-func load_map():
-	map = $Board
-
+func load_map(board):
+	self.map = board
 
 	for cell in map.get_used_cells():
 		match map.get_cellv(cell):
