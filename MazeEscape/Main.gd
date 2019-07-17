@@ -20,6 +20,9 @@ var player
 var board
 var board_container
 
+var x_dep
+var y_dep
+
 var levelEnCours = 0
 
 var LEVELS_LOCATION = "res://Levels"
@@ -91,9 +94,13 @@ func _process(delta):
 			pass
 
 func start_game():
+	x_dep = player.position.x
+	y_dep = player.position.y
 	player.enMarche  = true
 
 func stop_game():
+	player.position.x = x_dep
+	player.position.y = y_dep
 	player.enMarche  = false
 
 func restart_game():

@@ -8,7 +8,7 @@ enum TILE_TYPE { GRAVAT, TROU, PLAYER, WALL, WARP,JUMP, ARROW, EXIT, ARROW_RIGHT
 var player_resource = preload("res://Player.tscn")
 
 var OFFSET_X = 25
-var OFFSET_Y = 20
+var OFFSET_Y = 25
 
 var menu
 
