@@ -13,7 +13,10 @@ func _on_RestartButton_pressed():
 	emit_signal("restart")
 	print("J'ai restart le jeu")
 
-
+func reset():
+	$PlayButton.pressed=false
+	estCommencer = false
+	pass
 func _on_PlayButton_pressed():
 	if(estCommencer) :
 		emit_signal("stop")

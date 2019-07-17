@@ -1,8 +1,11 @@
 extends MarginContainer
 
+signal won 
+
+
 enum DIRECTION{HAUT,BAS,GAUCHE,DROITE}
 
-enum TILE_TYPE { GRAVAT, TROU, PLAYER, WALL, WARP,JUMP, ARROW, EXIT, ARROW_RIGHT,
+enum TILE_TYPE { GRAVAT, TROU, PLAYER, WALL, WARP,EXIT, ARROW, JUMP , ARROW_RIGHT,
  ARROW_LEFT, ARROW_UP, ARROW_DOWN}
 
 var player_resource = preload("res://Player.tscn")
@@ -14,6 +17,7 @@ var menu
 
 var map
 
+
 var player_actions
 
 var current_action
@@ -21,6 +25,7 @@ var current_action
 var player
 
 var warp_tiles = []
+#On charge la map et check si il y a un joueur pour l'instancier
 func load_map(board):
 	self.map = board
 
@@ -46,7 +51,7 @@ func _process(delta):
 				
 
 			
-
+#On teste les collisions selon les prochains déplacements du joueur 
 func check_collisions():
 	var next_tile
 	var next_position = map.world_to_map(player.position)
@@ -60,18 +65,27 @@ func check_collisions():
 		DIRECTION.BAS: 
 			next_tile = check_tile(next_position,0,-1)
 	
+	if	map.get_cellv(check_tile(next_position, 0,0)) == TILE_TYPE.EXIT:
+			emit_signal("won")
 	match map.get_cellv(next_tile): 
 		TILE_TYPE.ARROW_LEFT:
-			player.next_d = DIRECTION.GAUCHE
+			if(!player.fly > 0):
+				player.next_d = DIRECTION.GAUCHE
 		TILE_TYPE.ARROW_RIGHT:
-			player.next_d = DIRECTION.DROITE
+			if(!player.fly > 0):
+				player.next_d = DIRECTION.DROITE
 		TILE_TYPE.ARROW_UP:
-			player.next_d = DIRECTION.HAUT
+			if(!player.fly > 0):
+				player.next_d = DIRECTION.HAUT
 		TILE_TYPE.ARROW_DOWN:
-			player.next_d = DIRECTION.BAS
+			if(!player.fly > 0):
+				player.next_d = DIRECTION.BAS
+		TILE_TYPE.TROU:
+			if(!player.fly > 0) : 
+				player.death = true
 		TILE_TYPE.WALL:
 			match player.d :
-				DIRECTION.BAS :
+				DIRECTION.BAS :	
 					player.d = DIRECTION.DROITE
 				DIRECTION.DROITE:
 					player.d = DIRECTION.HAUT
@@ -79,6 +93,7 @@ func check_collisions():
 					player.d = DIRECTION.GAUCHE
 				DIRECTION.GAUCHE:
 					player.d = DIRECTION.BAS	
+			player.fly = 0
 		TILE_TYPE.WARP:
 			#on utilise [] + car sinon le tableau est passé par référence
 			var temp_warp = [] + warp_tiles
@@ -86,12 +101,16 @@ func check_collisions():
 				print(cell)
 			temp_warp.remove(temp_warp.find(next_tile))
 			var warp_position = map.map_to_world(temp_warp[0])
-
 			player.next_position = Vector2(warp_position.x + OFFSET_X, warp_position.y + OFFSET_Y)
+		TILE_TYPE.JUMP:
+			player.fly = 2
+			
 
 func check_tile (initial_position, x,y):
 	var normal = Vector2(x,y)
 	var new_pos = initial_position - normal
 	return new_pos
 
-
+func reset():
+	for i in get_children():
+		i.queue_free()
