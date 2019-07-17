@@ -22,13 +22,17 @@ func _physics_process(delta):
 		if(timer % 30 == 0):
 			match(d):
 				DIRECTION.HAUT:
-					position.y = position.y - movement 
+					position.y = position.y - 50
+					global_rotation_degrees = 180
 				DIRECTION.BAS:
-					position.y = position.y + movement
+					position.y = position.y + 50
+					global_rotation_degrees = 0
 				DIRECTION.GAUCHE:
-					position.x = position.x - movement
+					position.x = position.x - 50
+					global_rotation_degrees = 90
 				DIRECTION.DROITE:
-					position.x = position.x + movement
+					position.x = position.x + 50
+					global_rotation_degrees = 270
 			if(next_d != -1):
 				d = next_d
 				next_d = -1

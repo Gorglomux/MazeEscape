@@ -1,4 +1,4 @@
-extends MarginContainer
+extends VBoxContainer
 
 signal won 
 
@@ -11,7 +11,7 @@ enum TILE_TYPE { GRAVAT, TROU, PLAYER, WALL, WARP,EXIT, ARROW, JUMP , ARROW_RIGH
 var player_resource = preload("res://Player.tscn")
 
 var OFFSET_X = 25
-var OFFSET_Y = 20
+var OFFSET_Y = 25
 
 var menu
 

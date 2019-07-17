@@ -23,9 +23,13 @@ var player
 var board
 var board_container
 
+var x_dep
+var y_dep
+
 var levelEnCours = 0
 
 var LEVELS_LOCATION = "res://Levels"
+
 
 func _ready():
 	player_actions = $VBoxContainer/MarginContainer/PlayerActions
@@ -45,9 +49,10 @@ func _ready():
 	player_actions.connect("arrow",self,"arrow_input")
 	player_actions.connect("jump",self,"jump_input")
 	player_actions.connect("warp",self,"warp_input")
-	
+
 	board_container.connect("won", self, "on_win")
 	player.connect("death",self,"stop_game")	
+
 
 
 func _process(delta):
@@ -64,9 +69,14 @@ func _process(delta):
 			pass
 
 func start_game():
+	x_dep = player.position.x
+	y_dep = player.position.y
 	player.enMarche  = true
 
 func stop_game():
+	player.position.x = x_dep
+	player.position.y = y_dep
+	menu.reset()
 	player.enMarche  = false
 
 func restart_game():
