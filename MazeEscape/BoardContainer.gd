@@ -1,4 +1,4 @@
-extends MarginContainer
+extends VBoxContainer
 
 enum DIRECTION{HAUT,BAS,GAUCHE,DROITE}
 

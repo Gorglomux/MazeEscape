@@ -35,7 +35,6 @@ func generation_niveau():
 	levelEnCours += 1
 	board = level
 	$VBoxContainer/BoardContainer.add_child(level)
-	
 
 #Fonction servant a récupérer la liste de scènes (niveaux) contenue dans le fichier de niveaux
 func get_list_levels():
@@ -76,7 +75,6 @@ func _ready():
 	player_actions.connect("jump",self,"jump_input")
 	player_actions.connect("warp",self,"warp_input")
 
-		
 
 
 func _process(delta):
