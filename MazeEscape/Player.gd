@@ -11,7 +11,7 @@ var fly = 0
 var death = false
 func _ready():
 	timer = 0
-	d = DIRECTION.BAS
+	init_rotation()
 
 func _physics_process(delta):
 	if(enMarche):	
@@ -44,3 +44,16 @@ func _physics_process(delta):
 			if(death):
 				death=false
 				emit_signal("death")
+				
+func init_rotation():
+	match(d):
+		DIRECTION.HAUT:
+			global_rotation_degrees = 180
+		DIRECTION.BAS:
+			global_rotation_degrees = 0
+		DIRECTION.GAUCHE:
+			global_rotation_degrees = 90
+		DIRECTION.DROITE:
+			global_rotation_degrees = 270		
+	
+		

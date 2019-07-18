@@ -1,11 +1,21 @@
 extends Node2D
 
-#Liste des actions du joueur 
-enum ACTION_TYPE { SAUT, FLECHE, WARP }
 
 #Liste des types de tiles 
 enum TILE_TYPE { GRAVAT, TROU, PLAYER, WALL, WARP,EXIT, ARROW, JUMP, ARROW_RIGHT,
  ARROW_LEFT, ARROW_UP, ARROW_DOWN}
+
+#Liste des actions du joueur 
+enum ACTION { ARROW_LEFT, ARROW_RIGHT, ARROW_UP, ARROW_DOWN, WARP, JUMP}
+
+var object_links = {
+	"Arrow_left": ACTION.ARROW_LEFT,
+	"Arrow_right": ACTION.ARROW_RIGHT,
+	"Arrow_up": ACTION.ARROW_UP,
+	"Arrow_down": ACTION.ARROW_DOWN,
+	"Warp": ACTION.WARP,
+	"Jump": ACTION.JUMP
+}
 
 #Scène contenant le joueur
 var player_resource = preload("res://Player.tscn")
@@ -30,25 +40,22 @@ var levelEnCours = 0
 
 var LEVELS_LOCATION = "res://Levels"
 
+var cursor_sprite
 
+var action_name
+var last_container
 func _ready():
-	player_actions = $VBoxContainer/MarginContainer/PlayerActions
-	menu = $VBoxContainer/MenuContainer/Menu 
+	player_actions = $VBoxContainer/HBoxContainer/ActionsContainer/PlayerActions
+	menu = $VBoxContainer/HBoxContainer/MenuContainer/Menu
 	board_container = $VBoxContainer/BoardContainer
 	
 	generation_niveau()
-	
-
-	board_container.load_map(board)
-	player = board_container.player
 	
 	menu.connect("play",self,"start_game")
 	menu.connect("stop",self,"stop_game")
 	menu.connect("restart",self,"restart_game")	
 	
-	player_actions.connect("arrow",self,"arrow_input")
-	player_actions.connect("jump",self,"jump_input")
-	player_actions.connect("warp",self,"warp_input")
+	player_actions.connect("input_sent",self,"process_inputs")
 
 	board_container.connect("won", self, "on_win")
 	player.connect("death",self,"stop_game")	
@@ -56,18 +63,11 @@ func _ready():
 
 
 func _process(delta):
-
-	match current_action :
-		ACTION_TYPE.SAUT:
-			#change le curseur
-			pass
-		ACTION_TYPE.FLECHE:
-			#change le curseur
-			pass
-		ACTION_TYPE.WARP:
-			#change le curseur
-			pass
-
+	if cursor_sprite != null:
+		cursor_sprite.show()
+		cursor_sprite.position.x = get_local_mouse_position().x
+		cursor_sprite.position.y = get_local_mouse_position().y
+		
 func start_game():
 	x_dep = player.position.x
 	y_dep = player.position.y
@@ -76,27 +76,33 @@ func start_game():
 func stop_game():
 	player.position.x = x_dep
 	player.position.y = y_dep
+	player.d = board.starting_direction
+	player.init_rotation()
 	menu.reset()
 	player.enMarche  = false
 
 func restart_game():
-	get_tree().reload_current_scene()
+	levelEnCours -=1 
+	menu.reset()
+	player_actions.reset()
+	board_container.reset()
+	generation_niveau()
 
-func arrow_input():
-	current_action = ACTION_TYPE.FLECHE
+func process_inputs(container, sprite):
+	last_container = container
+	action_name = object_links[sprite.get_name()]
+	if cursor_sprite != null:
+		cursor_sprite.queue_free()
+	cursor_sprite = sprite.duplicate()
+	cursor_sprite.set_texture(sprite.texture)
+	add_child(cursor_sprite)
 
-func jump_input():
-	current_action = ACTION_TYPE.SAUT
-
-func warp_input():
-	current_action = ACTION_TYPE.WARP
 	
 func on_win():
 	menu.reset()
+	player_actions.reset()
 	board_container.reset()
 	generation_niveau()
-	board_container.load_map(board)
-	player = board_container.player
 	
 func generation_niveau():
 	var level
@@ -107,8 +113,18 @@ func generation_niveau():
 	
 	# On charge un niveau aléatoirement
 	level = load(LEVELS_LOCATION +"/"+ list_levels[levelEnCours]).instance()
+	player_actions.load_containers(level.actions)
+
+	
 	levelEnCours += 1
 	board = level
+	
+	board_container.load_map(board)
+	player = board_container.player
+	
+	player.d = level.starting_direction
+	player.init_rotation()
+	
 	$VBoxContainer/BoardContainer.add_child(level)
 	
 
@@ -133,3 +149,32 @@ func get_list_levels():
 			files.append(file)
 	dir.list_dir_end()
 	return files
+
+
+func _on_BoardContainer_gui_input(event):
+		if event is InputEventMouseButton:
+			if event.button_index == BUTTON_LEFT && event.pressed:
+				var mouse_pos = get_local_mouse_position()
+				
+				if action_name != null : 
+					var action
+					match action_name:
+						ACTION.ARROW_LEFT:
+							action = TILE_TYPE.ARROW_LEFT
+						ACTION.ARROW_RIGHT:
+							action = TILE_TYPE.ARROW_RIGHT
+						ACTION.ARROW_UP:
+							action = TILE_TYPE.ARROW_UP
+						ACTION.ARROW_DOWN:
+							action = TILE_TYPE.ARROW_DOWN
+						ACTION.WARP: 
+							action = TILE_TYPE.WARP
+						ACTION.JUMP:
+							action = TILE_TYPE.JUMP
+					var success = $VBoxContainer/BoardContainer.put_tile(mouse_pos, action)
+					if success:
+						last_container.hide()
+						cursor_sprite.queue_free()
+						cursor_sprite = null
+						action_name = null
+					
