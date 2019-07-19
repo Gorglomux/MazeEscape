@@ -27,7 +27,7 @@ func load_containers(types):
 				container.get_node("Warp").show()
 			ACTIONS.JUMP:
 				container.get_node("Jump").show()
-		container.rect_position.x = OS.window_size.x/2 - (types.size() * 60)/2 + 60 * i - 200
+		container.rect_position.x = OS.window_size.x/4 - (types.size() * 60)/2 + 60 * i
 		container.rect_position.y = 10
 		i += 1
 		container.connect("container_clicked",self,"on_container_clicked")
