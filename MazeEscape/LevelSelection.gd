@@ -1,11 +1,12 @@
 extends MarginContainer
 
+signal load_level
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
 
 var LEVELS_LOCATION = "res://Levels"
-var level_button_resource = preload("res://LevelButton.gd")
+var level_button_resource = preload("res://LevelButton.tscn")
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	#Trouver tous les niveaux, les ajouter sur la scène
@@ -14,12 +15,12 @@ func _ready():
 	for level in list_levels:
 		var level_button = level_button_resource.instance()
 		level_button.level_number = i
-		
-		
+		level_button.connect("pressed",self,"on_button_pressed")
+		i += 1
+		$VBoxContainer/LevelsGridContainer/Levels.add_child(level_button)
 
-
-
-
+func on_button_pressed(level):
+	emit_signal("load_level",level.level_number)
 
 #Fonction servant a récupérer la liste de scènes (niveaux) contenue dans le fichier de niveaux
 func get_list_levels():

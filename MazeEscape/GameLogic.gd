@@ -44,17 +44,16 @@ var cursor_sprite
 
 var action_name
 var last_container
-func _ready():
+func begin():
 	player_actions = $VBoxContainer/HBoxContainer/ActionsContainer/PlayerActions
 	menu = $VBoxContainer/HBoxContainer/MenuContainer/Menu
 	board_container = $VBoxContainer/BoardContainer
-	
-	generation_niveau()
 	
 	menu.connect("play",self,"start_game")
 	menu.connect("stop",self,"stop_game")
 	menu.connect("restart",self,"restart_game")	
 	
+	generation_niveau()
 	player_actions.connect("input_sent",self,"process_inputs")
 
 	board_container.connect("won", self, "on_win")
@@ -121,7 +120,6 @@ func generation_niveau():
 	var list_levels = get_list_levels()
 	var tile_size_x
 	var tile_size_y
-	
 	# On charge un niveau aléatoirement
 	level = load(LEVELS_LOCATION +"/"+ list_levels[levelEnCours]).instance()
 	player_actions.load_containers(level.actions)
@@ -130,6 +128,7 @@ func generation_niveau():
 	$VBoxContainer/HBoxContainer/LevelContainer/Level.text = " Level - " + str(levelEnCours)
 	board = level
 	
+	print(levelEnCours)
 	board_container.load_map(board)
 	player = board_container.player
 	

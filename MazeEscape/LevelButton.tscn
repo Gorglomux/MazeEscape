@@ -3,7 +3,7 @@
 [ext_resource path="res://LevelButton.gd" type="Script" id=1]
 [ext_resource path="res://bg_level.png" type="Texture" id=2]
 
-[node name="Level 1" type="MarginContainer"]
+[node name="Level" type="MarginContainer"]
 margin_right = 125.0
 margin_bottom = 50.0
 rect_min_size = Vector2( 125, 50 )
@@ -29,3 +29,4 @@ margin_bottom = 32.0
 text = "1"
 align = 1
 valign = 1
+[connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]

@@ -72,19 +72,15 @@ func check_collisions():
 		TILE_TYPE.ARROW_LEFT:
 			if(!player.fly > 0):
 				player.next_d = DIRECTION.GAUCHE
-				$Sounds/Move.play()
 		TILE_TYPE.ARROW_RIGHT:
 			if(!player.fly > 0):
 				player.next_d = DIRECTION.DROITE
-				$Sounds/Move.play()
 		TILE_TYPE.ARROW_UP:
 			if(!player.fly > 0):
 				player.next_d = DIRECTION.HAUT
-				$Sounds/Move.play()
 		TILE_TYPE.ARROW_DOWN:
 			if(!player.fly > 0):
 				player.next_d = DIRECTION.BAS
-				$Sounds/Move.play()
 		TILE_TYPE.TROU:
 			if(!player.fly > 0) : 
 				player.death = true
