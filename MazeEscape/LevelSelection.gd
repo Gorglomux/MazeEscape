@@ -5,14 +5,17 @@ extends MarginContainer
 # var b = "text"
 
 var LEVELS_LOCATION = "res://Levels"
-#var level_button_resource = preload()
+var level_button_resource = preload("res://LevelButton.gd")
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	#Trouver tous les niveaux, les ajouter sur la scène
 	var list_levels = get_list_levels()
 	var i = 1
 	for level in list_levels:
-		pass		
+		var level_button = level_button_resource.instance()
+		level_button.level_number = i
+		
+		
 
 
 
