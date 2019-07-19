@@ -106,7 +106,8 @@ func check_collisions():
 			player.fly = 2
 			
 func put_tile(pos, action):	
-	var coords = Vector2(map.world_to_map(pos).x, map.world_to_map(pos).y -1)
+
+	var coords = Vector2(map.world_to_map(pos).x, map.world_to_map(Vector2(pos.x,pos.y-OFFSET_X)).y -1)
 	#si il n'y a rien a l'emplacement du curseur
 	if map.get_cellv(coords) == -1:
 		if action == TILE_TYPE.WARP:
