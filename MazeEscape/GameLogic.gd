@@ -1,6 +1,7 @@
 extends Node2D
 
 
+signal game_over
 #Liste des types de tiles 
 enum TILE_TYPE { GRAVAT, TROU, PLAYER, WALL, WARP,EXIT, ARROW, JUMP, ARROW_RIGHT,
  ARROW_LEFT, ARROW_UP, ARROW_DOWN}
@@ -115,9 +116,13 @@ func on_win():
 	player.init_rotation()
 	
 func generation_niveau():
+
 	var level
 	# On récupère la liste de tous les niveaux et on initialise toutes les variable
 	var list_levels = get_list_levels()
+	if list_levels.size() - 1 < levelEnCours:
+		emit_signal("game_over")
+		return
 	var tile_size_x
 	var tile_size_y
 	# On charge un niveau aléatoirement

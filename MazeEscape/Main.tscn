@@ -1,25 +1,30 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://bg.png" type="Texture" id=1]
 [ext_resource path="res://TitleScreen.tscn" type="PackedScene" id=2]
-[ext_resource path="res://LevelSelection.gd" type="Script" id=3]
-[ext_resource path="res://Font.tres" type="DynamicFont" id=4]
+[ext_resource path="res://Font.tres" type="DynamicFont" id=3]
+[ext_resource path="res://Font_small.tres" type="DynamicFont" id=4]
+[ext_resource path="res://LevelSelection.gd" type="Script" id=5]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends Node2D
 var game_logic_resource = preload(\"res://GameLogic.tscn\")
+var game
 func _ready():
 	$LevelSelection.connect(\"load_level\",self,\"load_level\")
 	
 func load_level(level_number):
 	$LevelSelection.hide()
-	var game = game_logic_resource.instance()
+	game = game_logic_resource.instance()
 	game.levelEnCours = level_number - 1
 	game.begin()
+	game.connect(\"game_over\", self,\"end\")
 	add_child(game)
 	
-	
-
+func end():
+	game.queue_free()
+	print(\"Over !\")
+	$Game_Over.show()
 func _on_Button_pressed():
 	$TitleScreen.hide()
 	$LevelSelection.show()
@@ -36,12 +41,57 @@ texture = ExtResource( 1 )
 
 [node name="TitleScreen" parent="." instance=ExtResource( 2 )]
 editor/display_folded = true
+
+[node name="Game_Over" type="MarginContainer" parent="."]
 visible = false
+margin_right = 1023.0
+margin_bottom = 598.0
+
+[node name="HBoxContainer" type="VBoxContainer" parent="Game_Over"]
+margin_right = 1023.0
+margin_bottom = 667.0
+
+[node name="MarginContainer" type="MarginContainer" parent="Game_Over/HBoxContainer"]
+margin_right = 1023.0
+margin_bottom = 341.0
+custom_constants/margin_right = 0
+custom_constants/margin_top = 100
+custom_constants/margin_left = 0
+custom_constants/margin_bottom = 100
+
+[node name="Label" type="Label" parent="Game_Over/HBoxContainer/MarginContainer"]
+margin_top = 100.0
+margin_right = 1023.0
+margin_bottom = 241.0
+custom_fonts/font = ExtResource( 3 )
+text = "Game Over !
+Thanks for playing !"
+align = 1
+
+[node name="MarginContainer2" type="MarginContainer" parent="Game_Over/HBoxContainer"]
+margin_top = 345.0
+margin_right = 1023.0
+margin_bottom = 567.0
+custom_constants/margin_bottom = 50
+
+[node name="Label2" type="Label" parent="Game_Over/HBoxContainer/MarginContainer2"]
+margin_right = 1023.0
+margin_bottom = 172.0
+custom_fonts/font = ExtResource( 4 )
+text = "Programming 
+ Gorglomux
+ Babchanteur
+
+
+	Art
+Baptiste"
+align = 1
 
 [node name="LevelSelection" type="MarginContainer" parent="."]
+visible = false
 margin_right = 1024.0
 margin_bottom = 599.0
-script = ExtResource( 3 )
+script = ExtResource( 5 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="LevelSelection"]
 margin_right = 1024.0
@@ -54,7 +104,7 @@ margin_bottom = 69.0
 [node name="Label" type="Label" parent="LevelSelection/VBoxContainer/MarginContainer"]
 margin_right = 1024.0
 margin_bottom = 69.0
-custom_fonts/font = ExtResource( 4 )
+custom_fonts/font = ExtResource( 3 )
 text = "Select a level"
 align = 1
 
