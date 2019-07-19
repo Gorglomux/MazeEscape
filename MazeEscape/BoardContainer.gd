@@ -99,8 +99,6 @@ func check_collisions():
 			if(!player.fly > 0):
 				#on utilise [] + car sinon le tableau est passé par référence
 				var temp_warp = [] + warp_tiles
-				for cell in temp_warp:
-					print(cell)
 				temp_warp.remove(temp_warp.find(next_tile))
 				var warp_position = map.map_to_world(temp_warp[0])
 				player.next_position = Vector2(warp_position.x + OFFSET_X, warp_position.y + OFFSET_Y)
@@ -111,6 +109,8 @@ func put_tile(pos, action):
 	var coords = Vector2(map.world_to_map(pos).x, map.world_to_map(pos).y -1)
 	#si il n'y a rien a l'emplacement du curseur
 	if map.get_cellv(coords) == -1:
+		if action == TILE_TYPE.WARP:
+			warp_tiles.append(Vector2(map.world_to_map(pos).x,map.world_to_map(pos).y-1))
 		map.set_cellv(coords,action)
 		return true
 	else :
@@ -122,5 +122,6 @@ func check_tile (initial_position, x,y):
 	return new_pos
 
 func reset():
+	warp_tiles = []
 	for i in get_children():
 		i.queue_free()

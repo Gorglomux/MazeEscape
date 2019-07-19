@@ -13,7 +13,6 @@ func _ready():
 func load_containers(types):
 	var i = 0
 	for type in types:
-		print("ah")
 		var container = container_resource.instance()
 		match type:
 			ACTIONS.ARROW_LEFT:
