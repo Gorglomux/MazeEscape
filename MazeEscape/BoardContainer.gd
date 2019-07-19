@@ -111,7 +111,7 @@ func put_tile(pos, action):
 	#si il n'y a rien a l'emplacement du curseur
 	if map.get_cellv(coords) == -1:
 		if action == TILE_TYPE.WARP:
-			warp_tiles.append(Vector2(map.world_to_map(pos).x,map.world_to_map(pos).y-1))
+			warp_tiles.append(coords)
 		map.set_cellv(coords,action)
 		return true
 	else :
