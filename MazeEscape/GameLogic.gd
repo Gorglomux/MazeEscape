@@ -71,6 +71,7 @@ func _process(delta):
 func start_game():
 	x_dep = player.position.x
 	y_dep = player.position.y
+	player.d = board.starting_direction
 	player.enMarche  = true
 
 func stop_game():
@@ -79,15 +80,23 @@ func stop_game():
 	player.d = board.starting_direction
 	player.init_rotation()
 	menu.reset()
+	reset_cursor()
 	player.enMarche  = false
 
 func restart_game():
 	levelEnCours -=1 
 	menu.reset()
+	reset_cursor()
 	player_actions.reset()
 	board_container.reset()
 	generation_niveau()
 
+func reset_cursor():
+	if cursor_sprite !=null:
+		cursor_sprite.queue_free()
+		cursor_sprite = null
+		action_name = null
+	
 func process_inputs(container, sprite):
 	last_container = container
 	action_name = object_links[sprite.get_name()]
@@ -103,6 +112,8 @@ func on_win():
 	player_actions.reset()
 	board_container.reset()
 	generation_niveau()
+	player.d = board.starting_direction
+	player.init_rotation()
 	
 func generation_niveau():
 	var level
@@ -115,8 +126,8 @@ func generation_niveau():
 	level = load(LEVELS_LOCATION +"/"+ list_levels[levelEnCours]).instance()
 	player_actions.load_containers(level.actions)
 
-	
 	levelEnCours += 1
+	$VBoxContainer/HBoxContainer/LevelContainer/Level.text = " Level - " + str(levelEnCours)
 	board = level
 	
 	board_container.load_map(board)

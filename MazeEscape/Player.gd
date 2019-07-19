@@ -1,6 +1,7 @@
 extends Area2D
 
 signal death
+
 var enMarche = false
 enum DIRECTION{HAUT,BAS,GAUCHE,DROITE}
 var d
