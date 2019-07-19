@@ -26,9 +26,24 @@ rect_clip_content = true
 [node name="Menu" parent="VBoxContainer/HBoxContainer/MenuContainer" instance=ExtResource( 2 )]
 margin_right = 120.0
 
-[node name="ActionsContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer"]
+[node name="LevelContainer" type="MarginContainer" parent="VBoxContainer/HBoxContainer"]
 margin_left = 124.0
-margin_right = 282.0
+margin_right = 349.0
+margin_bottom = 70.0
+custom_constants/margin_top = 30
+custom_constants/margin_left = 175
+
+[node name="Level" type="Label" parent="VBoxContainer/HBoxContainer/LevelContainer"]
+margin_left = 175.0
+margin_top = 30.0
+margin_right = 225.0
+margin_bottom = 70.0
+rect_min_size = Vector2( 50, 40 )
+text = "Level"
+
+[node name="ActionsContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer"]
+margin_left = 353.0
+margin_right = 511.0
 margin_bottom = 70.0
 rect_min_size = Vector2( 158, 50 )
 custom_constants/separation = 0
@@ -38,21 +53,6 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_right = 0.0
 margin_bottom = 70.0
-
-[node name="LevelContainer" type="MarginContainer" parent="VBoxContainer/HBoxContainer"]
-margin_left = 286.0
-margin_right = 686.0
-margin_bottom = 70.0
-custom_constants/margin_top = 30
-custom_constants/margin_left = 350
-
-[node name="Level" type="Label" parent="VBoxContainer/HBoxContainer/LevelContainer"]
-margin_left = 350.0
-margin_top = 30.0
-margin_right = 400.0
-margin_bottom = 70.0
-rect_min_size = Vector2( 50, 40 )
-text = "Level"
 
 [node name="BoardContainer" type="VBoxContainer" parent="VBoxContainer"]
 margin_top = 74.0
