@@ -44,9 +44,16 @@ align = 1
 [node name="MarginContainer3" type="MarginContainer" parent="HBoxContainer"]
 margin_top = 474.0
 margin_right = 1023.0
-margin_bottom = 494.0
+margin_bottom = 564.0
+custom_constants/margin_right = 300
+custom_constants/margin_top = 20
+custom_constants/margin_left = 300
+custom_constants/margin_bottom = 20
 
 [node name="Button" type="Button" parent="HBoxContainer/MarginContainer3"]
-margin_right = 1023.0
-margin_bottom = 20.0
+margin_left = 300.0
+margin_top = 20.0
+margin_right = 723.0
+margin_bottom = 70.0
+rect_min_size = Vector2( 50, 50 )
 text = "Play"

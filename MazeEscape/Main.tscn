@@ -48,7 +48,7 @@ margin_bottom = 598.0
 
 [node name="HBoxContainer" type="VBoxContainer" parent="Game_Over"]
 margin_right = 1023.0
-margin_bottom = 667.0
+margin_bottom = 598.0
 
 [node name="MarginContainer" type="MarginContainer" parent="Game_Over/HBoxContainer"]
 margin_right = 1023.0
@@ -98,7 +98,8 @@ margin_bottom = 599.0
 
 [node name="MarginContainer" type="MarginContainer" parent="LevelSelection/VBoxContainer"]
 margin_right = 1024.0
-margin_bottom = 69.0
+margin_bottom = 129.0
+custom_constants/margin_bottom = 60
 
 [node name="Label" type="Label" parent="LevelSelection/VBoxContainer/MarginContainer"]
 margin_right = 1024.0
@@ -108,9 +109,9 @@ text = "Select a level"
 align = 1
 
 [node name="LevelsGridContainer" type="MarginContainer" parent="LevelSelection/VBoxContainer"]
-margin_top = 73.0
+margin_top = 133.0
 margin_right = 1024.0
-margin_bottom = 73.0
+margin_bottom = 133.0
 
 [node name="Levels" type="GridContainer" parent="LevelSelection/VBoxContainer/LevelsGridContainer"]
 margin_right = 1024.0
