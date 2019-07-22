@@ -70,6 +70,7 @@ func start_game():
 	x_dep = player.position.x
 	y_dep = player.position.y
 	player.d = board.starting_direction
+	player.arrow.hide()
 	player.enMarche  = true
 
 func stop_game():
@@ -77,6 +78,7 @@ func stop_game():
 	player.position.y = y_dep
 	player.d = board.starting_direction
 	player.next_d = -1
+	player.arrow.show()
 	player.init_rotation()
 	menu.reset()
 	reset_cursor()
@@ -145,7 +147,9 @@ func generation_niveau():
 	player = board_container.player
 	
 	player.d = level.starting_direction
+	
 	player.init_rotation()
+	
 	player.connect("won", self, "on_win")
 	player.connect("death",self,"stop_game")	
 

@@ -23,7 +23,7 @@ var player_actions
 var current_action
 
 var player
-
+var playerArrow
 var warp_tiles = []
 #On charge la map et check si il y a un joueur pour l'instancier
 func load_map(board):

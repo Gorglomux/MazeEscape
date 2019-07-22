@@ -14,7 +14,9 @@ var fly = 0
 var last_fly = 0
 var death = false
 var won = false
+var arrow
 func _ready():
+	arrow = get_node("Arrow")
 	timer = 0
 	init_rotation()
 
@@ -36,16 +38,12 @@ func _physics_process(delta):
 				match(d):
 					DIRECTION.HAUT:
 						position.y = position.y - 400
-						global_rotation_degrees = 270
 					DIRECTION.BAS:
 						position.y = position.y + 400
-						global_rotation_degrees = 90
 					DIRECTION.GAUCHE:
 						position.x = position.x - 400
-						global_rotation_degrees = 180
 					DIRECTION.DROITE:
 						position.x = position.x + 400
-						global_rotation_degrees = 0
 			if(next_d != -1):
 				d = next_d
 				next_d = -1
@@ -61,12 +59,12 @@ func _physics_process(delta):
 func init_rotation():
 	match(d):
 		DIRECTION.HAUT:
-			global_rotation_degrees = 270
+			$Arrow.global_rotation_degrees = 270
 		DIRECTION.BAS:
-			global_rotation_degrees = 90
+			$Arrow.global_rotation_degrees = 90
 		DIRECTION.GAUCHE:
-			global_rotation_degrees = 180
+			$Arrow.global_rotation_degrees = 180
 		DIRECTION.DROITE:
-			global_rotation_degrees = 0		
+			$Arrow.global_rotation_degrees = 0		
 	
 		
