@@ -97,13 +97,20 @@ func reset_cursor():
 		action_name = null
 	
 func process_inputs(container, sprite):
-	last_container = container
-	action_name = object_links[sprite.get_name()]
-	if cursor_sprite != null:
-		cursor_sprite.queue_free()
-	cursor_sprite = sprite.duplicate()
-	cursor_sprite.set_texture(sprite.texture)
-	add_child(cursor_sprite)
+	if last_container == container : 
+		action_name = null
+		last_container = null
+		if cursor_sprite != null:
+			cursor_sprite.queue_free()
+			cursor_sprite= null
+	else:			
+		last_container = container
+		action_name = object_links[sprite.get_name()]
+		if cursor_sprite != null:
+			cursor_sprite.queue_free()
+		cursor_sprite = sprite.duplicate()
+		cursor_sprite.set_texture(sprite.texture)
+		add_child(cursor_sprite)
 
 	
 func on_win():
