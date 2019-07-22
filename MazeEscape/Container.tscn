@@ -6,7 +6,7 @@
 [ext_resource path="res://arrow_right.png" type="Texture" id=4]
 [ext_resource path="res://arrow_up.png" type="Texture" id=5]
 [ext_resource path="res://arrow_down.png" type="Texture" id=6]
-[ext_resource path="res://teleporteur.png" type="Texture" id=7]
+[ext_resource path="res://warp.png" type="Texture" id=7]
 [ext_resource path="res://jump.png" type="Texture" id=8]
 
 [node name="Container" type="MarginContainer"]
@@ -28,30 +28,36 @@ texture = ExtResource( 2 )
 [node name="Arrow_left" type="Sprite" parent="."]
 visible = false
 position = Vector2( 25, 25 )
+scale = Vector2( 0.125, 0.125 )
 texture = ExtResource( 3 )
 
 [node name="Arrow_right" type="Sprite" parent="."]
 visible = false
 position = Vector2( 25, 25 )
+scale = Vector2( 0.125, 0.125 )
 texture = ExtResource( 4 )
 
 [node name="Arrow_up" type="Sprite" parent="."]
 visible = false
 position = Vector2( 25, 25 )
+scale = Vector2( 0.125, 0.125 )
 texture = ExtResource( 5 )
 
 [node name="Arrow_down" type="Sprite" parent="."]
 visible = false
 position = Vector2( 25, 25 )
+scale = Vector2( 0.125, 0.125 )
 texture = ExtResource( 6 )
 
 [node name="Warp" type="Sprite" parent="."]
 visible = false
 position = Vector2( 25, 25 )
+scale = Vector2( 0.125, 0.125 )
 texture = ExtResource( 7 )
 
 [node name="Jump" type="Sprite" parent="."]
 visible = false
 position = Vector2( 25, 25 )
+scale = Vector2( 0.125, 0.125 )
 texture = ExtResource( 8 )
 [connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]

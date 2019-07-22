@@ -1,9 +1,14 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://GameLogic.gd" type="Script" id=1]
 [ext_resource path="res://Menu.tscn" type="PackedScene" id=2]
 [ext_resource path="res://PlayerActions.tscn" type="PackedScene" id=3]
 [ext_resource path="res://BoardContainer.gd" type="Script" id=4]
+[ext_resource path="res://Move.wav" type="AudioStream" id=5]
+[ext_resource path="res://Fall.wav" type="AudioStream" id=6]
+[ext_resource path="res://Jump.wav" type="AudioStream" id=7]
+[ext_resource path="res://Warp.wav" type="AudioStream" id=8]
+[ext_resource path="res://Exit.wav" type="AudioStream" id=9]
 
 [node name="GameLogic" type="Node2D"]
 script = ExtResource( 1 )
@@ -54,10 +59,36 @@ anchor_bottom = 0.0
 margin_right = 0.0
 margin_bottom = 70.0
 
-[node name="BoardContainer" type="VBoxContainer" parent="VBoxContainer"]
-margin_top = 74.0
-margin_right = 1026.0
-margin_bottom = 560.0
+[node name="Node2D" type="Node2D" parent="VBoxContainer"]
+scale = Vector2( 0.125, 0.125 )
+
+[node name="BoardContainer" type="MarginContainer" parent="VBoxContainer/Node2D"]
+margin_top = 518.0
+margin_right = 8177.0
+margin_bottom = 4790.0
 rect_min_size = Vector2( 0, 486 )
+custom_constants/margin_right = 50
+custom_constants/margin_left = 50
 script = ExtResource( 4 )
-[connection signal="gui_input" from="VBoxContainer/BoardContainer" to="." method="_on_BoardContainer_gui_input"]
+
+[node name="Move" type="AudioStreamPlayer2D" parent="VBoxContainer/Node2D/BoardContainer"]
+stream = ExtResource( 5 )
+pitch_scale = 0.5
+bus = "New Bus"
+
+[node name="Fall" type="AudioStreamPlayer2D" parent="VBoxContainer/Node2D/BoardContainer"]
+stream = ExtResource( 6 )
+bus = "New Bus"
+
+[node name="Jump" type="AudioStreamPlayer2D" parent="VBoxContainer/Node2D/BoardContainer"]
+stream = ExtResource( 7 )
+bus = "New Bus"
+
+[node name="Warp" type="AudioStreamPlayer2D" parent="VBoxContainer/Node2D/BoardContainer"]
+stream = ExtResource( 8 )
+bus = "New Bus"
+
+[node name="Exit" type="AudioStreamPlayer2D" parent="VBoxContainer/Node2D/BoardContainer"]
+stream = ExtResource( 9 )
+bus = "New Bus"
+[connection signal="gui_input" from="VBoxContainer/Node2D/BoardContainer" to="." method="_on_BoardContainer_gui_input"]

@@ -48,8 +48,8 @@ var last_container
 func begin():
 	player_actions = $VBoxContainer/HBoxContainer/ActionsContainer/PlayerActions
 	menu = $VBoxContainer/HBoxContainer/MenuContainer/Menu
-	board_container = $VBoxContainer/BoardContainer
-	
+	board_container = $VBoxContainer/Node2D/BoardContainer
+
 	menu.connect("play",self,"start_game")
 	menu.connect("stop",self,"stop_game")
 	menu.connect("restart",self,"restart_game")	
@@ -57,12 +57,10 @@ func begin():
 	generation_niveau()
 	player_actions.connect("input_sent",self,"process_inputs")
 
-	board_container.connect("won", self, "on_win")
-	player.connect("death",self,"stop_game")	
 
 
 
-func _process(delta):
+func _physics_process(delta):
 	if cursor_sprite != null:
 		cursor_sprite.show()
 		cursor_sprite.position.x = get_local_mouse_position().x
@@ -78,6 +76,7 @@ func stop_game():
 	player.position.x = x_dep
 	player.position.y = y_dep
 	player.d = board.starting_direction
+	player.next_d = -1
 	player.init_rotation()
 	menu.reset()
 	reset_cursor()
@@ -112,6 +111,7 @@ func on_win():
 	player_actions.reset()
 	board_container.reset()
 	generation_niveau()
+	reset_cursor()
 	player.d = board.starting_direction
 	player.init_rotation()
 	
@@ -139,8 +139,10 @@ func generation_niveau():
 	
 	player.d = level.starting_direction
 	player.init_rotation()
-	
-	$VBoxContainer/BoardContainer.add_child(level)
+	player.connect("won", self, "on_win")
+	player.connect("death",self,"stop_game")	
+
+	$VBoxContainer/Node2D/BoardContainer.	add_child(level)
 	
 
 #Fonction servant a récupérer la liste de scènes (niveaux) contenue dans le fichier de niveaux
@@ -170,7 +172,7 @@ func _on_BoardContainer_gui_input(event):
 		if event is InputEventMouseButton:
 			if event.button_index == BUTTON_LEFT && event.pressed:
 				var mouse_pos = get_local_mouse_position()
-				
+				print(mouse_pos)
 				if action_name != null : 
 					var action
 					match action_name:
@@ -186,7 +188,7 @@ func _on_BoardContainer_gui_input(event):
 							action = TILE_TYPE.WARP
 						ACTION.JUMP:
 							action = TILE_TYPE.JUMP
-					var success = $VBoxContainer/BoardContainer.put_tile(mouse_pos, action)
+					var success = $VBoxContainer/Node2D/BoardContainer.put_tile(mouse_pos*8, action)
 					if success:
 						last_container.hide()
 						cursor_sprite.queue_free()

@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://bg.png" type="Texture" id=1]
 [ext_resource path="res://TitleScreen.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Font.tres" type="DynamicFont" id=3]
 [ext_resource path="res://Font_small.tres" type="DynamicFont" id=4]
 [ext_resource path="res://LevelSelection.gd" type="Script" id=5]
+[ext_resource path="res://music.wav" type="AudioStream" id=6]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends Node2D
@@ -12,6 +13,14 @@ var game_logic_resource = preload(\"res://GameLogic.tscn\")
 var game
 func _ready():
 	$LevelSelection.connect(\"load_level\",self,\"load_level\")
+	
+	
+func _process(delta):
+	if(Input.is_action_just_pressed(\"ui_cancel\")):
+		if game != null :
+			game.queue_free()
+			game = null
+		$LevelSelection.show()
 	
 func load_level(level_number):
 	$LevelSelection.hide()
@@ -83,7 +92,7 @@ text = "Programming
 
 
 	Art
-Baptiste"
+-NightCrow-"
 align = 1
 
 [node name="LevelSelection" type="MarginContainer" parent="."]
@@ -115,7 +124,11 @@ margin_bottom = 133.0
 
 [node name="Levels" type="GridContainer" parent="LevelSelection/VBoxContainer/LevelsGridContainer"]
 margin_right = 1024.0
-columns = 5
+columns = 10
+
+[node name="music" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 6 )
+autoplay = true
 [connection signal="pressed" from="TitleScreen/HBoxContainer/MarginContainer3/Button" to="." method="_on_Button_pressed"]
 
 [editable path="TitleScreen"]

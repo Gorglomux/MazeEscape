@@ -1,77 +1,78 @@
-[gd_resource type="TileSet" load_steps=13 format=2]
+[gd_resource type="TileSet" load_steps=14 format=2]
 
 [ext_resource path="res://gravat.png" type="Texture" id=1]
-[ext_resource path="res://hole.png" type="Texture" id=2]
+[ext_resource path="res://trou.png" type="Texture" id=2]
 [ext_resource path="res://arrow_up.png" type="Texture" id=3]
 [ext_resource path="res://arrow_down.png" type="Texture" id=4]
 [ext_resource path="res://border.png" type="Texture" id=5]
-[ext_resource path="res://player.png" type="Texture" id=6]
+[ext_resource path="res://minotaure.png" type="Texture" id=6]
 [ext_resource path="res://wall.png" type="Texture" id=7]
-[ext_resource path="res://teleporteur.png" type="Texture" id=8]
+[ext_resource path="res://warp.png" type="Texture" id=8]
 [ext_resource path="res://exit.png" type="Texture" id=9]
 [ext_resource path="res://arrow.png" type="Texture" id=10]
 [ext_resource path="res://jump.png" type="Texture" id=11]
-[ext_resource path="res://arrow_left.png" type="Texture" id=12]
+[ext_resource path="res://arrow_right.png" type="Texture" id=12]
+[ext_resource path="res://arrow_left.png" type="Texture" id=13]
 
 [resource]
 0/name = "Gravat"
 0/texture = ExtResource( 1 )
 0/tex_offset = Vector2( 0, 0 )
 0/modulate = Color( 1, 1, 1, 1 )
-0/region = Rect2( 0, 0, 50, 50 )
+0/region = Rect2( 0, 0, 400, 400 )
 0/tile_mode = 0
-0/occluder_offset = Vector2( 25, 25 )
-0/navigation_offset = Vector2( 25, 25 )
+0/occluder_offset = Vector2( 200, 200 )
+0/navigation_offset = Vector2( 200, 200 )
 0/shapes = [  ]
 0/z_index = 0
 1/name = "Hole"
 1/texture = ExtResource( 2 )
 1/tex_offset = Vector2( 0, 0 )
 1/modulate = Color( 1, 1, 1, 1 )
-1/region = Rect2( 0, 0, 50, 50 )
+1/region = Rect2( 0, 0, 400, 379 )
 1/tile_mode = 0
-1/occluder_offset = Vector2( 25, 25 )
-1/navigation_offset = Vector2( 25, 25 )
+1/occluder_offset = Vector2( 200, 189.5 )
+1/navigation_offset = Vector2( 200, 189.5 )
 1/shapes = [  ]
 1/z_index = 0
 2/name = "Player"
 2/texture = ExtResource( 6 )
 2/tex_offset = Vector2( 0, 0 )
 2/modulate = Color( 1, 1, 1, 1 )
-2/region = Rect2( 0, 0, 50, 50 )
+2/region = Rect2( 0, 0, 287, 379 )
 2/tile_mode = 0
-2/occluder_offset = Vector2( 25, 25 )
-2/navigation_offset = Vector2( 25, 25 )
+2/occluder_offset = Vector2( 143.5, 189.5 )
+2/navigation_offset = Vector2( 143.5, 189.5 )
 2/shapes = [  ]
 2/z_index = 0
 3/name = "Wall"
 3/texture = ExtResource( 7 )
 3/tex_offset = Vector2( 0, 0 )
 3/modulate = Color( 1, 1, 1, 1 )
-3/region = Rect2( 0, 0, 50, 50 )
+3/region = Rect2( 0, 0, 400, 400 )
 3/tile_mode = 0
-3/occluder_offset = Vector2( 25, 25 )
-3/navigation_offset = Vector2( 25, 25 )
+3/occluder_offset = Vector2( 200, 200 )
+3/navigation_offset = Vector2( 200, 200 )
 3/shapes = [  ]
 3/z_index = 0
 4/name = "Teleporteur"
 4/texture = ExtResource( 8 )
 4/tex_offset = Vector2( 0, 0 )
 4/modulate = Color( 1, 1, 1, 1 )
-4/region = Rect2( 0, 0, 50, 52 )
+4/region = Rect2( 0, 0, 389, 400 )
 4/tile_mode = 0
-4/occluder_offset = Vector2( 25, 26 )
-4/navigation_offset = Vector2( 25, 26 )
+4/occluder_offset = Vector2( 194.5, 200 )
+4/navigation_offset = Vector2( 194.5, 200 )
 4/shapes = [  ]
 4/z_index = 0
 5/name = "Exit"
 5/texture = ExtResource( 9 )
 5/tex_offset = Vector2( 0, 0 )
 5/modulate = Color( 1, 1, 1, 1 )
-5/region = Rect2( 0, 0, 50, 50 )
+5/region = Rect2( 0, 0, 354, 380 )
 5/tile_mode = 0
-5/occluder_offset = Vector2( 25, 25 )
-5/navigation_offset = Vector2( 25, 25 )
+5/occluder_offset = Vector2( 177, 190 )
+5/navigation_offset = Vector2( 177, 190 )
 5/shapes = [  ]
 5/z_index = 0
 6/name = "Arrow"
@@ -88,59 +89,59 @@
 7/texture = ExtResource( 11 )
 7/tex_offset = Vector2( 0, 0 )
 7/modulate = Color( 1, 1, 1, 1 )
-7/region = Rect2( 0, 0, 50, 50 )
+7/region = Rect2( 0, 0, 400, 400 )
 7/tile_mode = 0
-7/occluder_offset = Vector2( 25, 25 )
-7/navigation_offset = Vector2( 25, 25 )
+7/occluder_offset = Vector2( 200, 200 )
+7/navigation_offset = Vector2( 200, 200 )
 7/shapes = [  ]
 7/z_index = 0
 8/name = "Arrow_right"
-8/texture = ExtResource( 10 )
+8/texture = ExtResource( 12 )
 8/tex_offset = Vector2( 0, 0 )
 8/modulate = Color( 1, 1, 1, 1 )
-8/region = Rect2( 0, 0, 50, 50 )
+8/region = Rect2( 0, 0, 400, 400 )
 8/tile_mode = 0
-8/occluder_offset = Vector2( 25, 25 )
-8/navigation_offset = Vector2( 25, 25 )
+8/occluder_offset = Vector2( 200, 200 )
+8/navigation_offset = Vector2( 200, 200 )
 8/shapes = [  ]
 8/z_index = 0
 9/name = "Arrow_left"
-9/texture = ExtResource( 12 )
+9/texture = ExtResource( 13 )
 9/tex_offset = Vector2( 0, 0 )
 9/modulate = Color( 1, 1, 1, 1 )
-9/region = Rect2( 0, 0, 50, 50 )
+9/region = Rect2( 0, 0, 400, 400 )
 9/tile_mode = 0
-9/occluder_offset = Vector2( 25, 25 )
-9/navigation_offset = Vector2( 25, 25 )
+9/occluder_offset = Vector2( 200, 200 )
+9/navigation_offset = Vector2( 200, 200 )
 9/shapes = [  ]
 9/z_index = 0
 10/name = "Arrow_up"
 10/texture = ExtResource( 3 )
 10/tex_offset = Vector2( 0, 0 )
 10/modulate = Color( 1, 1, 1, 1 )
-10/region = Rect2( 0, 0, 50, 50 )
+10/region = Rect2( 0, 0, 400, 400 )
 10/tile_mode = 0
-10/occluder_offset = Vector2( 25, 25 )
-10/navigation_offset = Vector2( 25, 25 )
+10/occluder_offset = Vector2( 200, 200 )
+10/navigation_offset = Vector2( 200, 200 )
 10/shapes = [  ]
 10/z_index = 0
 11/name = "Arrow_down"
 11/texture = ExtResource( 4 )
 11/tex_offset = Vector2( 0, 0 )
 11/modulate = Color( 1, 1, 1, 1 )
-11/region = Rect2( 0, 0, 50, 50 )
+11/region = Rect2( 0, 0, 400, 400 )
 11/tile_mode = 0
-11/occluder_offset = Vector2( 25, 25 )
-11/navigation_offset = Vector2( 25, 25 )
+11/occluder_offset = Vector2( 200, 200 )
+11/navigation_offset = Vector2( 200, 200 )
 11/shapes = [  ]
 11/z_index = 0
 12/name = "Sprite"
 12/texture = ExtResource( 5 )
 12/tex_offset = Vector2( 0, 0 )
 12/modulate = Color( 1, 1, 1, 1 )
-12/region = Rect2( 0, 0, 50, 50 )
+12/region = Rect2( 0, 0, 400, 400 )
 12/tile_mode = 0
-12/occluder_offset = Vector2( 25, 25 )
-12/navigation_offset = Vector2( 25, 25 )
+12/occluder_offset = Vector2( 200, 200 )
+12/navigation_offset = Vector2( 200, 200 )
 12/shapes = [  ]
 12/z_index = 0
